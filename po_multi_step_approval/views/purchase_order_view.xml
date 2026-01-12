@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.approval</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">
+                    draft,sent,under_legal_review,purchase,done
+                </attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_confirm']" position="after">
+
+                <button name="action_department_manager_approval"
+                        type="object"
+                        string="Department Manager Approval"
+                        class="oe_highlight"
+                        groups="po_multi_step_approval.group_department_manager"
+                        invisible="amount_total &lt;= 50000 or department_manager_approval"/>
+
+                <button name="action_cfo_approval"
+                        type="object"
+                        string="CFO Approval"
+                        class="oe_highlight"
+                        groups="po_multi_step_approval.group_cfo"
+                        invisible="amount_total &lt;= 100000 or cfo_approval"/>
+
+                <button name="action_legal_approval"
+                        type="object"
+                        string="Legal Approval"
+                        class="oe_highlight"
+                        groups="po_multi_step_approval.group_legal_department"
+                        invisible="state != 'under_legal_review'"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
