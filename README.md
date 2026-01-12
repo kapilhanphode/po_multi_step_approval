@@ -7,7 +7,7 @@ This module implements a custom multi-step approval process for Purchase Orders 
 **Approval Flow**
 
 **Department Manager Approval**
-Required when PO amount exceeds **50,000**
+Required when PO amount exceeds **50,000**</br>
 PO cannot be confirmed without this approval
 
 **CFO Approval**
